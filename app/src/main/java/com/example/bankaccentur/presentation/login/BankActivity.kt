@@ -1,11 +1,12 @@
-package com.example.bankaccentur
+package com.example.bankaccentur.presentation.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
+import com.example.bankaccentur.presentation.details.BankDetailsActivity
+import com.example.bankaccentur.R
 
-class LoginActivity : AppCompatActivity() {
+class BankActivity : AppCompatActivity() {
 
     private lateinit var buttonLogin: Button
 
@@ -16,8 +17,11 @@ class LoginActivity : AppCompatActivity() {
         buttonLogin = findViewById(R.id.buttonLogin)
 
         buttonLogin.setOnClickListener {
-            val intent = LoginDetailsActivity.getStartIntent(this@LoginActivity)
-            this@LoginActivity.startActivity(intent)
+            val intent =
+                BankDetailsActivity.getStartIntent(
+                    this@BankActivity
+                )
+            this@BankActivity.startActivity(intent)
         }
     }
 }
