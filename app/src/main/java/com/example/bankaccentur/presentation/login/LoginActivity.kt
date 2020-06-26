@@ -6,7 +6,7 @@ import android.widget.Button
 import com.example.bankaccentur.presentation.details.BankDetailsActivity
 import com.example.bankaccentur.R
 
-class BankActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var buttonLogin: Button
 
@@ -19,9 +19,9 @@ class BankActivity : AppCompatActivity() {
         buttonLogin.setOnClickListener {
             val intent =
                 BankDetailsActivity.getStartIntent(
-                    this@BankActivity
+                    this@LoginActivity
                 )
-            this@BankActivity.startActivity(intent)
+            this@LoginActivity.startActivity(intent)
         }
     }
 }

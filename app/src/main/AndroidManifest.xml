@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.details.BankDetailsActivity"></activity>
-        <activity android:name=".presentation.login.BankActivity">
+        <activity android:name=".presentation.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
