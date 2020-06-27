@@ -1,6 +1,6 @@
 package com.example.bankaccentur.data.model
 
-data class PaymentHistory(
+data class Statement(
     val title: String,
     val desc: String,
     val date: String,

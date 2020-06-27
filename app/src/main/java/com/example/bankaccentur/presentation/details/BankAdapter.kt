@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
-import com.example.bankaccentur.data.model.PaymentHistory
+import com.example.bankaccentur.data.model.Statement
 import kotlinx.android.synthetic.main.activity_payment.view.*
 
-class BankAdapter(private val lista: List<PaymentHistory>): RecyclerView.Adapter<BankAdapter.MyViewHolder>() {
+class BankAdapter(private val lista: List<Statement>): RecyclerView.Adapter<BankAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.activity_payment, parent, false)
@@ -30,7 +30,7 @@ class BankAdapter(private val lista: List<PaymentHistory>): RecyclerView.Adapter
         private val date = itemView.textViewDate
         private val value = itemView.textViewValue
 
-        fun bindView(pagamento: PaymentHistory) {
+        fun bindView(pagamento: Statement) {
             title.text = pagamento.title
             desc.text = pagamento.desc
             date.text = pagamento.date
