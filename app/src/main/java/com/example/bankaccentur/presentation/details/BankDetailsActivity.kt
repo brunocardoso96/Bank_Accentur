@@ -5,11 +5,17 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
+import com.example.bankaccentur.data.StatementApi
 import com.example.bankaccentur.data.model.Statement
+import com.example.bankaccentur.data.response.StatementListResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BankDetailsActivity : AppCompatActivity() {
 
@@ -27,6 +33,26 @@ class BankDetailsActivity : AppCompatActivity() {
             val adapter = BankAdapter(listaPagamentos())
             recyclerView.adapter = adapter
         }
+
+        StatementApi.service.getStatement().enqueue(object: Callback<StatementListResponse> {
+            override fun onResponse(call: Call<StatementListResponse>, response: Response<StatementListResponse>) {
+                if(response.isSuccessful) {
+                    response.body()?.let{statementListResponse ->
+                        for(result in statementListResponse.statementList) {
+                            val state = result.getStatementModel()
+                            Log.i("Title", "Title: " + state.title + "   Desc" + result.desc )
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<StatementListResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+
+        })
+
     }
     companion object {
         fun getStartIntent(context: Context): Intent { return Intent(context, BankDetailsActivity::class.java)}
