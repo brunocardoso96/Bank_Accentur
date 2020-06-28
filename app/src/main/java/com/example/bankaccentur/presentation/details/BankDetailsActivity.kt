@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
@@ -27,33 +30,22 @@ class BankDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bank_details_activity)
 
         recyclerView = findViewById(R.id.recyclerViewPayment)
+        val viewModel: BankViewModel = ViewModelProviders.of(this).get(BankViewModel::class.java)
 
-        StatementApi.service.getStatement().enqueue(object: Callback<StatementListResponse> {
-            override fun onResponse(call: Call<StatementListResponse>, response: Response<StatementListResponse>) {
-                if(response.isSuccessful) {
-                    val lists: MutableList<Statement> = mutableListOf()
-                    response.body()?.let{statementListResponse ->
-                        for(result in statementListResponse.statementList) {
-                            val listaState = result.getStatementModel()
-                            lists.add(listaState)
-                        }
-                    }
-                    initalizerRecycler(lists)
-                }
-            }
-
-            override fun onFailure(call: Call<StatementListResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+        viewModel.bankLiveData.observe(this, Observer {
+            it?.let {statements ->
+                initalizerRecycler(statements)
             }
         })
 
-
+        viewModel.getStatementLive()
 
     }
     companion object {
         fun getStartIntent(context: Context): Intent { return Intent(context, BankDetailsActivity::class.java)}
     }
 
+    @SuppressLint("WrongConstant")
     fun initalizerRecycler(list: List<Statement>) {
         recyclerView.apply {
             recyclerView.layoutManager = LinearLayoutManager(this@BankDetailsActivity, LinearLayout.VERTICAL, false)
@@ -62,12 +54,4 @@ class BankDetailsActivity : AppCompatActivity() {
         }
     }
 
-    fun listaPagamentos(): List<Statement> {
-        return listOf(
-            Statement("Pagamento", "Conta de luz", "2018-08-15", (-50).toDouble()),
-            Statement("TED Recebida", "Joao Alfredo", "2018-07-25", (745.03).toDouble()),
-            Statement("DOC Recebida", "Victor Silva", "2018-06-23", (399.9).toDouble()),
-            Statement("Pagamento", "Conta de internet", "2018-05-12", (-73.4).toDouble())
-        )
-    }
 }
