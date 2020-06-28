@@ -28,34 +28,38 @@ class BankDetailsActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerViewPayment)
 
-        recyclerView.apply {
-            recyclerView.layoutManager = LinearLayoutManager(this@BankDetailsActivity, LinearLayout.VERTICAL, false)
-            val adapter = BankAdapter(listaPagamentos())
-            recyclerView.adapter = adapter
-        }
-
         StatementApi.service.getStatement().enqueue(object: Callback<StatementListResponse> {
             override fun onResponse(call: Call<StatementListResponse>, response: Response<StatementListResponse>) {
                 if(response.isSuccessful) {
+                    val lists: MutableList<Statement> = mutableListOf()
                     response.body()?.let{statementListResponse ->
                         for(result in statementListResponse.statementList) {
-                            val state = result.getStatementModel()
-                            Log.i("Title", "Title: " + state.title + "   Desc" + result.desc )
+                            val listaState = result.getStatementModel()
+                            lists.add(listaState)
                         }
                     }
+                    initalizerRecycler(lists)
                 }
             }
 
             override fun onFailure(call: Call<StatementListResponse>, t: Throwable) {
                 TODO("Not yet implemented")
             }
-
-
         })
+
+
 
     }
     companion object {
         fun getStartIntent(context: Context): Intent { return Intent(context, BankDetailsActivity::class.java)}
+    }
+
+    fun initalizerRecycler(list: List<Statement>) {
+        recyclerView.apply {
+            recyclerView.layoutManager = LinearLayoutManager(this@BankDetailsActivity, LinearLayout.VERTICAL, false)
+            val adapter = BankAdapter(list)
+            recyclerView.adapter = adapter
+        }
     }
 
     fun listaPagamentos(): List<Statement> {
