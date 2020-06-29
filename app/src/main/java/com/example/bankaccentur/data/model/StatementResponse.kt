@@ -1,4 +1,4 @@
-package com.example.bankaccentur.data.response
+package com.example.bankaccentur.data.model
 
 import com.example.bankaccentur.data.model.Statement
 import com.squareup.moshi.Json
@@ -20,5 +20,4 @@ data class StatementResponse(
         desc = this.desc,
         date = this.date,
         value = this.value)
-
 }

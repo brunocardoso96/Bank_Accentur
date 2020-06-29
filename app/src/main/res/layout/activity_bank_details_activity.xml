@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLogo"
     android:orientation="vertical"
-    tools:context=".presentation.details.BankDetailsActivity">
+    tools:context=".ui.main.BankMainActivity">
 
     <TextView
         android:id="@+id/textViewName"

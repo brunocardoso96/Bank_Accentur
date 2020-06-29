@@ -1,10 +1,10 @@
-package com.example.bankaccentur.presentation.details
+package com.example.bankaccentur.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.bankaccentur.data.StatementApi
+import com.example.bankaccentur.data.retrofit.StatementApi
 import com.example.bankaccentur.data.model.Statement
-import com.example.bankaccentur.data.response.StatementListResponse
+import com.example.bankaccentur.data.model.StatementListResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

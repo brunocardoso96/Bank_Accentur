@@ -1,4 +1,4 @@
-package com.example.bankaccentur.data
+package com.example.bankaccentur.data.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,5 +11,6 @@ object StatementApi {
             .build()
     }
 
-    val service: StatementService = initRetrofit().create(StatementService::class.java)
+    val service: StatementService = initRetrofit()
+        .create(StatementService::class.java)
 }

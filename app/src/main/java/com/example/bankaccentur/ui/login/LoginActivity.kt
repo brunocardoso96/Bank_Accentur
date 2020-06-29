@@ -1,9 +1,9 @@
-package com.example.bankaccentur.presentation.login
+package com.example.bankaccentur.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.bankaccentur.presentation.details.BankDetailsActivity
+import com.example.bankaccentur.ui.main.BankMainActivity
 import com.example.bankaccentur.R
 
 class LoginActivity : AppCompatActivity() {
@@ -14,11 +14,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        buttonLogin = findViewById(R.id.buttonLogin)
+        initialize()
+    }
 
+    fun initialize() {
+        buttonLogin = findViewById(R.id.buttonLogin)
         buttonLogin.setOnClickListener {
             val intent =
-                BankDetailsActivity.getStartIntent(
+                BankMainActivity.getStartIntent(
                     this@LoginActivity
                 )
             this@LoginActivity.startActivity(intent)

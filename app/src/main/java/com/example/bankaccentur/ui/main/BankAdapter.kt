@@ -1,4 +1,4 @@
-package com.example.bankaccentur.presentation.details
+package com.example.bankaccentur.ui.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,6 @@ class BankAdapter(private val lista: List<Statement>): RecyclerView.Adapter<Bank
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.activity_payment, parent, false)
-
         return MyViewHolder(itemView)
     }
 
@@ -21,7 +20,6 @@ class BankAdapter(private val lista: List<Statement>): RecyclerView.Adapter<Bank
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindView(lista[position])
     }
-
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -36,7 +34,5 @@ class BankAdapter(private val lista: List<Statement>): RecyclerView.Adapter<Bank
             date.text = pagamento.date
             value.text = pagamento.value.toString()
         }
-
     }
-
 }
