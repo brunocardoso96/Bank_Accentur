@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
-import com.example.bankaccentur.data.model.Statement
+import com.example.bankaccentur.data.model.StatementResponse
 
 class BankMainActivity : AppCompatActivity() {
 
@@ -41,7 +41,7 @@ class BankMainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("WrongConstant")
-    fun initalizeRecycler(list: List<Statement>) {
+    fun initalizeRecycler(list: List<StatementResponse>) {
         recyclerView.apply {
             recyclerView.layoutManager = LinearLayoutManager(this@BankMainActivity, LinearLayout.VERTICAL, false)
             val adapter = BankAdapter(list)

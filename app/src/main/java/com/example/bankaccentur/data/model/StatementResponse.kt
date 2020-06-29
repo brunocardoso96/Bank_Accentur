@@ -1,6 +1,5 @@
 package com.example.bankaccentur.data.model
 
-import com.example.bankaccentur.data.model.Statement
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -15,7 +14,7 @@ data class StatementResponse(
     @Json(name ="value")
     val value: Double) {
 
-    fun getStatementModel() =  Statement(
+    fun getStatementModel() =  StatementResponse(
         title = this.title,
         desc = this.desc,
         date = this.date,
