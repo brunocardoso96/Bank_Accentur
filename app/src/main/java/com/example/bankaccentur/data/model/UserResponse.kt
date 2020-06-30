@@ -14,8 +14,9 @@ data class UserResponse (
     @Json(name ="agency")
     val agency: String,
     @Json(name ="balance")
-    val balance: Double)
-//) {
+    val balance: Double
+)
+//{
 //    fun getLogin() = UserResponse(
 //        userId = this.userId,
 //        name = this.name,
