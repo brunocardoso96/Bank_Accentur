@@ -14,13 +14,13 @@ data class UserResponse (
     @Json(name ="agency")
     val agency: String,
     @Json(name ="balance")
-    val balance: Double
-) {
-    fun getLogin() = UserResponse(
-        userId = this.userId,
-        name = this.name,
-        bankAccount = this.bankAccount,
-        agency = this.agency,
-        balance = this.balance
-    )
-}
+    val balance: Double)
+//) {
+//    fun getLogin() = UserResponse(
+//        userId = this.userId,
+//        name = this.name,
+//        bankAccount = this.bankAccount,
+//        agency = this.agency,
+//        balance = this.balance
+//    )
+//}

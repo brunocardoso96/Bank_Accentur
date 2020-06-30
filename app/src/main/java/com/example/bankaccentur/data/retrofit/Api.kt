@@ -16,5 +16,4 @@ object Api {
 
     val serviceUser: Service = initRetrofit()
         .create(Service::class.java)
-
 }

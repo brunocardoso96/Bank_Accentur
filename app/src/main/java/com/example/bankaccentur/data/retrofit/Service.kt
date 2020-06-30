@@ -2,19 +2,17 @@ package com.example.bankaccentur.data.retrofit
 
 import com.example.bankaccentur.data.model.StatementListResponse
 import com.example.bankaccentur.data.model.UserAccountResponse
+import com.example.bankaccentur.data.model.UserLoginRequest
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface Service {
     @GET("statements/1")
     fun getStatement() : Call<StatementListResponse>
 
     @POST("login")
+    @FormUrlEncoded
     fun postAluno(
-        @Query("user") user:String = "test_user",
-        @Query("password") password:String = "Test@1"
-    ) : Call<UserAccountResponse>
-
+        @Field("user") user:String,
+        @Field("password") pass:String) : Call<UserAccountResponse>
 }

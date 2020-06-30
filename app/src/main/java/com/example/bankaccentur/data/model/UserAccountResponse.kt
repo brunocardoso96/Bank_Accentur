@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-class UserAccountResponse(
+data class UserAccountResponse(
     @Json(name ="userAccount")
     val userAccount: UserResponse
 )

@@ -7,6 +7,7 @@ import android.widget.Button
 import com.example.bankaccentur.ui.main.BankMainActivity
 import com.example.bankaccentur.R
 import com.example.bankaccentur.data.model.UserAccountResponse
+import com.example.bankaccentur.data.model.UserLoginRequest
 import com.example.bankaccentur.data.retrofit.Api
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,17 +23,14 @@ class UserActivity : AppCompatActivity() {
 
         initialize()
 
-        Api.serviceUser.postAluno().enqueue(object: Callback<UserAccountResponse> {
-            override fun onResponse(
-                call: Call<UserAccountResponse>,
-                response: Response<UserAccountResponse>
-            ) {
+        Api.serviceUser.postAluno("test_user", "Test@1").enqueue(object: Callback<UserAccountResponse> {
+            override fun onResponse(call: Call<UserAccountResponse>, response: Response<UserAccountResponse>) {
+
                 Log.i("USER_VERIFY", "Login Batendo na API")
 
-                response.body()?.let { userAccountResponse ->
-                    val user = userAccountResponse.userAccount
-                    Log.i("USER_VERIFY", "Nome: " + user.name)
-                }
+
+                    val user = response.body()
+                    Log.i("USER_VERIFY", "Nome: " + user)
             }
 
             override fun onFailure(call: Call<UserAccountResponse>, t: Throwable) {
@@ -40,9 +38,7 @@ class UserActivity : AppCompatActivity() {
             }
 
         })
-
     }
-
     fun initialize() {
         buttonLogin = findViewById(R.id.buttonLogin)
         buttonLogin.setOnClickListener {
