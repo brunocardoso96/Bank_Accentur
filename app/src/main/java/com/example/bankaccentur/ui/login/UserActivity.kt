@@ -33,7 +33,7 @@ class UserActivity : AppCompatActivity() {
             val intent = BankMainActivity.getStartIntent(this@UserActivity)
             viewModel.userLiveData.observe(this, Observer {userResponse ->
                 userResponse?.let {
-                    intent.putExtra("EXTRA_userId", it.userId)
+                    intent.putExtra("EXTRA_userId", it.userId.toString())
                     intent.putExtra("EXTRA_name", it.name)
                     intent.putExtra("EXTRA_bankAccount", it.bankAccount)
                     intent.putExtra("EXTRA_agency", it.agency)

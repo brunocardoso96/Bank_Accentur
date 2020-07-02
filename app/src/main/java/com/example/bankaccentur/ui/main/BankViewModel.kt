@@ -15,8 +15,8 @@ class BankViewModel : ViewModel() {
     val bankLiveData: MutableLiveData<List<StatementResponse>> = MutableLiveData()
 
 
-    fun getStatementLive() {
-        Api.serviceStatement.getStatement().enqueue(object: Callback<StatementListResponse> {
+    fun getStatementLive(userId: Int) {
+        Api.serviceStatement.getStatement(userId).enqueue(object: Callback<StatementListResponse> {
             override fun onResponse(call: Call<StatementListResponse>, response: Response<StatementListResponse>) {
                 if(response.isSuccessful) {
                     val lists: MutableList<StatementResponse> = mutableListOf()

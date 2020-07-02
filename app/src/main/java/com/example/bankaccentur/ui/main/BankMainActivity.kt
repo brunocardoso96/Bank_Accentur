@@ -42,7 +42,7 @@ class BankMainActivity : AppCompatActivity() {
                 initalizeRecycler(statements)
             }
         })
-        viewModel.getStatementLive()
+        viewModel.getStatementLive(userId.toInt())
     }
 
     @SuppressLint("WrongConstant")
