@@ -5,15 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.example.bankaccentur.ui.main.BankMainActivity
 import com.example.bankaccentur.R
-import com.example.bankaccentur.data.model.UserAccountResponse
-import com.example.bankaccentur.data.retrofit.Api
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UserActivity : AppCompatActivity() {
 
@@ -21,10 +15,11 @@ class UserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_user)
 
         initialize()
     }
+
     fun initialize() {
         clickButtonLogin()
     }
@@ -32,16 +27,21 @@ class UserActivity : AppCompatActivity() {
     fun clickButtonLogin() {
         buttonLogin = findViewById(R.id.buttonLogin)
         val viewModel: UserViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        viewModel.autenticLogin()
 
         buttonLogin.setOnClickListener {
-            val intent =
-                BankMainActivity.getStartIntent(
-                    this@UserActivity
-                )
-
-           viewModel.autenticLogin()
-
+            val intent = BankMainActivity.getStartIntent(this@UserActivity)
+            viewModel.userLiveData.observe(this, Observer {userResponse ->
+                userResponse?.let {
+                    intent.putExtra("EXTRA_userId", it.userId)
+                    intent.putExtra("EXTRA_name", it.name)
+                    intent.putExtra("EXTRA_bankAccount", it.bankAccount)
+                    intent.putExtra("EXTRA_agency", it.agency)
+                    intent.putExtra("EXTRA_balance", it.balance.toString())
+                }
+            })
             this@UserActivity.startActivity(intent)
         }
+
     }
 }

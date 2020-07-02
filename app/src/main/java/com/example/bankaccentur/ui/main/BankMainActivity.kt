@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
 import com.example.bankaccentur.data.model.StatementResponse
+import kotlinx.android.synthetic.main.activity_bank_main_activity.*
 
 class BankMainActivity : AppCompatActivity() {
 
@@ -20,7 +22,7 @@ class BankMainActivity : AppCompatActivity() {
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bank_details_activity)
+        setContentView(R.layout.activity_bank_main_activity)
 
         initalizer()
     }
@@ -31,6 +33,9 @@ class BankMainActivity : AppCompatActivity() {
     fun initalizer() {
         recyclerView = findViewById(R.id.recyclerViewPayment)
         val viewModel: BankViewModel = ViewModelProviders.of(this).get(BankViewModel::class.java)
+
+        val userId = intent.getStringExtra("EXTRA_userId")
+        initializeUserInfo()
 
         viewModel.bankLiveData.observe(this, Observer {
             it?.let {statements ->
@@ -47,6 +52,18 @@ class BankMainActivity : AppCompatActivity() {
             val adapter = BankAdapter(list)
             recyclerView.adapter = adapter
         }
+    }
+
+    fun initializeUserInfo() {
+        val name = intent.getStringExtra("EXTRA_name")
+        val bankAccount = intent.getStringExtra("EXTRA_bankAccount")
+        val agency = intent.getStringExtra("EXTRA_agency")
+        val balance = intent.getStringExtra("EXTRA_balance")
+
+        textViewName.setText(name)
+        textViewBankAccount.setText(bankAccount)
+        textViewAgency.setText(agency)
+        textViewBalance.setText(balance)
     }
 
 }
