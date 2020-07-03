@@ -1,6 +1,5 @@
 package com.example.bankaccentur.ui.login
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -46,16 +45,13 @@ class UserActivity : AppCompatActivity() {
                 }
             })
             this@UserActivity.startActivity(intent)
-
-            getUserPass()
+            verifyPassword()
         }
     }
 
-    fun getUserPass() {
-        val userInput = textViewUser.text
+    fun verifyPassword() {
         val passInput = textViewPass.text
-
-        if(!VerificarSenha().verificar(passInput)) {
+        if(!VerifyPassword().verificar(passInput)) {
             Log.i("VERIFY", "False")
             intent = Intent(this, UserActivity::class.java)
             startActivity(intent)
