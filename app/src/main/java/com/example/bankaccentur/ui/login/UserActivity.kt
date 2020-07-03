@@ -45,18 +45,53 @@ class UserActivity : AppCompatActivity() {
                 }
             })
             this@UserActivity.startActivity(intent)
-            verifyPassword()
+            verifyUser()
         }
     }
 
-    fun verifyPassword() {
-        val passInput = textViewPass.text
-        if(!VerifyPassword().verificar(passInput)) {
-            Log.i("VERIFY", "False")
-            intent = Intent(this, UserActivity::class.java)
+    fun verifyUser() {
+        val pass= verifyPassword()
+        val email= verifyCpf()
+        val cpf= verifyEmail()
+        intent = Intent(this, UserActivity::class.java)
+
+        if(!pass) {
             startActivity(intent)
             Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
+            Log.i("VERIFY", "Login/Password error Password")
+        } else
+        if(cpf) {
+            Log.i("VERIFY", "CPF OK")
+        } else if(email) {
+            Log.i("VERIFY", "Email Ok")
+        } else {
+            startActivity(intent)
+            Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
+            Log.i("VERIFY", "Login/Password error - pass OK")
         }
 
+    }
+    fun verifyPassword(): Boolean {
+        val passInput = textViewPass.text.toString()
+        if(!UserVerification().verifyPassword(passInput)) {
+            return false
+        }
+        return true
+    }
+
+    fun verifyCpf(): Boolean {
+        val userInput = textViewUser.text.toString()
+        if(!UserVerification().verifyCpf(userInput)) {
+            return false
+        }
+        return true
+    }
+
+    fun verifyEmail(): Boolean {
+        val userInput = textViewUser.text.toString()
+        if(!UserVerification().verifyEmail(userInput)) {
+            return false
+        }
+        return true
     }
 }
