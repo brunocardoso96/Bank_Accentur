@@ -1,6 +1,7 @@
 package com.example.bankaccentur.ui.login
 
 import android.util.Log
+import android.view.View.Z
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -30,7 +31,7 @@ class UserViewModel : ViewModel() {
                 }
             }
             override fun onFailure(call: Call<UserAccountResponse>, t: Throwable) {
-                Log.i("VERIFY", "ERRO NO LOGIN/SENHA")
+
             }
         })
     }
