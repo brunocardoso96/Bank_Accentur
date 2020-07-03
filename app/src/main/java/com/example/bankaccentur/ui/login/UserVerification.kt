@@ -1,7 +1,5 @@
 package com.example.bankaccentur.ui.login
 
-import android.text.Editable
-import android.util.Log
 import java.util.*
 import java.util.regex.Pattern
 
@@ -22,15 +20,10 @@ class UserVerification {
                 "(?=.*[@#$%^&+=])" +
                 "(?=\\S+$)" +
                 ".{4,}" +
-
                 "$"
     )
     fun verifyPassword(pass: String): Boolean {
-        if(PASSWORD_PATTERN.matcher(pass).matches()) {
-            return true
-        } else {
-            return false
-        }
+        return PASSWORD_PATTERN.matcher(pass).matches()
     }
 
     fun verifyCpf(CPF: String): Boolean {
@@ -80,13 +73,6 @@ class UserVerification {
     }
 
     fun verifyEmail(email: String): Boolean {
-        if(EMAIL_ADRESS.matcher(email).matches()) {
-            return true
-        } else {
-            return false
-        }
+        return EMAIL_ADRESS.matcher(email).matches()
     }
-
-
-
 }

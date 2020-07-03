@@ -16,6 +16,7 @@ class UserActivity : AppCompatActivity() {
 
     private lateinit var buttonLogin: Button
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
@@ -25,7 +26,6 @@ class UserActivity : AppCompatActivity() {
 
     fun initialize() {
         clickButtonLogin()
-
     }
 
     fun clickButtonLogin() {
@@ -59,18 +59,15 @@ class UserActivity : AppCompatActivity() {
             startActivity(intent)
             Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
             Log.i("VERIFY", "Login/Password error Password")
-        } else
-        if(cpf) {
-            Log.i("VERIFY", "CPF OK")
-        } else if(email) {
-            Log.i("VERIFY", "Email Ok")
+        } else if(cpf) {Log.i("VERIFY", "CPF OK")
+        } else if(email) { Log.i("VERIFY", "Email Ok")
         } else {
             startActivity(intent)
             Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
             Log.i("VERIFY", "Login/Password error - pass OK")
         }
-
     }
+
     fun verifyPassword(): Boolean {
         val passInput = textViewPass.text.toString()
         if(!UserVerification().verifyPassword(passInput)) {
