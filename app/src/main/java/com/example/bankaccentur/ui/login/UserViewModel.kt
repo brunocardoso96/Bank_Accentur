@@ -17,7 +17,11 @@ class UserViewModel : ViewModel() {
     val userLiveData: MutableLiveData<UserResponse> = MutableLiveData()
 
     fun autenticLogin(){
-        Api.serviceUser.postAluno("test_user", "Test@1").enqueue(object:
+
+        val user = "test_user"
+        val pass = "Test@1"
+
+        Api.serviceUser.postAluno(user, pass).enqueue(object:
             Callback<UserAccountResponse> {
             override fun onResponse(call: Call<UserAccountResponse>, response: Response<UserAccountResponse>) {
                 response.body()?.let {userAccountResponse ->
@@ -25,7 +29,9 @@ class UserViewModel : ViewModel() {
                     userLiveData.value = user
                 }
             }
-            override fun onFailure(call: Call<UserAccountResponse>, t: Throwable) {}
+            override fun onFailure(call: Call<UserAccountResponse>, t: Throwable) {
+                Log.i("VERIFY", "ERRO NO LOGIN/SENHA")
+            }
         })
     }
 }

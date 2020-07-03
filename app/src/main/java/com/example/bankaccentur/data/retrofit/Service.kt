@@ -17,10 +17,3 @@ interface Service {
         @Field("user") user:String,
         @Field("password") pass:String) : Call<UserAccountResponse>
 }
-
-/*
-
-@POST("login")
-fun postAluno(user, password) : Call<UserAccountResponse>
-
-*/

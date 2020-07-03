@@ -33,15 +33,13 @@ class BankMainActivity : AppCompatActivity() {
     fun initalizer() {
         recyclerView = findViewById(R.id.recyclerViewPayment)
         val viewModel: BankViewModel = ViewModelProviders.of(this).get(BankViewModel::class.java)
-
-        val userId = intent.getStringExtra("EXTRA_userId")
         initializeUserInfo()
-
         viewModel.bankLiveData.observe(this, Observer {
             it?.let {statements ->
                 initalizeRecycler(statements)
             }
         })
+        val userId = intent.getStringExtra("EXTRA_userId")
         viewModel.getStatementLive(userId.toInt())
     }
 

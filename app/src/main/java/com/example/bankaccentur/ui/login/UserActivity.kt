@@ -3,11 +3,13 @@ package com.example.bankaccentur.ui.login
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.bankaccentur.ui.main.BankMainActivity
 import com.example.bankaccentur.R
+import kotlinx.android.synthetic.main.activity_user.*
 
 class UserActivity : AppCompatActivity() {
 
@@ -41,7 +43,15 @@ class UserActivity : AppCompatActivity() {
                 }
             })
             this@UserActivity.startActivity(intent)
-        }
 
+            getUserPass()
+        }
+    }
+
+    fun getUserPass() {
+        val userInput = textViewUser.text
+        val passInput = textViewPass.text
+
+        Log.i("VERIFY", "User: $userInput / Password: $passInput")
     }
 }

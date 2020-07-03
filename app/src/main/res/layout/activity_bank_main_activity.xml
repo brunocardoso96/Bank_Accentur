@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,6 +39,7 @@
         android:layout_width="60dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
+        android:text="Agency"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -62,6 +64,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
+        android:text="Account"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textViewName" />
 
@@ -96,6 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:layout_marginTop="40dp"
+        android:text="Balance"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textViewAgency" />
 
