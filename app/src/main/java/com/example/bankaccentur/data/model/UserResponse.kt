@@ -16,12 +16,3 @@ data class UserResponse (
     @Json(name ="balance")
     val balance: Double
 )
-//{
-//    fun getLogin() = UserResponse(
-//        userId = this.userId,
-//        name = this.name,
-//        bankAccount = this.bankAccount,
-//        agency = this.agency,
-//        balance = this.balance
-//    )
-//}
