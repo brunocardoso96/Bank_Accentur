@@ -16,7 +16,6 @@ class UserActivity : AppCompatActivity() {
 
     private lateinit var buttonLogin: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
@@ -30,10 +29,15 @@ class UserActivity : AppCompatActivity() {
 
     fun clickButtonLogin() {
         buttonLogin = findViewById(R.id.buttonLogin)
-        val viewModel: UserViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
-        viewModel.autenticLogin()
 
         buttonLogin.setOnClickListener {
+            val viewModel: UserViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+
+            val passInput = textViewPass.text.toString()
+            val userInput = textViewUser.text.toString()
+
+            viewModel.autenticLogin(userInput, passInput)
+
             val intent = BankMainActivity.getStartIntent(this@UserActivity)
             viewModel.userLiveData.observe(this, Observer {userResponse ->
                 userResponse?.let {
@@ -42,9 +46,9 @@ class UserActivity : AppCompatActivity() {
                     intent.putExtra("EXTRA_bankAccount", it.bankAccount)
                     intent.putExtra("EXTRA_agency", it.agency)
                     intent.putExtra("EXTRA_balance", it.balance.toString())
+                    this@UserActivity.startActivity(intent)
                 }
             })
-            this@UserActivity.startActivity(intent)
             verifyUser()
         }
     }
