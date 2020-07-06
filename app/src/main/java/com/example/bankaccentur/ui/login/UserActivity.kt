@@ -33,33 +33,29 @@ class UserActivity : AppCompatActivity() {
 
     fun clickButtonLogin() {
         buttonLogin = findViewById(R.id.buttonLogin)
-
         buttonLogin.setOnClickListener {
             val viewModel: UserViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
-
             val passInput = textViewPass.text.toString()
             val userInput = textViewUser.text.toString()
-
             PreferenceManager.getDefaultSharedPreferences(this@UserActivity).edit().putString("MYLABEL", userInput).apply()
-
             viewModel.autenticLogin(userInput, passInput)
-
             val intent = BankMainActivity.getStartIntent(this@UserActivity)
-            viewModel.userLiveData.observe(this, Observer {userResponse ->
-                userResponse?.let {
-                    intent.putExtra("EXTRA_userId", it.userId.toString())
-                    intent.putExtra("EXTRA_name", it.name)
-                    intent.putExtra("EXTRA_bankAccount", it.bankAccount)
-                    intent.putExtra("EXTRA_agency", it.agency)
-                    intent.putExtra("EXTRA_balance", it.balance.toString())
+            if(verifyUser()) {
+                viewModel.userLiveData.observe(this, Observer {userResponse ->
+                    userResponse?.let {
+                        intent.putExtra("EXTRA_userId", it.userId.toString())
+                        intent.putExtra("EXTRA_name", it.name)
+                        intent.putExtra("EXTRA_bankAccount", it.bankAccount)
+                        intent.putExtra("EXTRA_agency", it.agency)
+                        intent.putExtra("EXTRA_balance", it.balance.toString())
+                    }
                     this@UserActivity.startActivity(intent)
-                }
-            })
-            verifyUser()
+                })
+            }
         }
     }
 
-    fun verifyUser() {
+    fun verifyUser(): Boolean {
         val pass= verifyPassword()
         val email= verifyCpf()
         val cpf= verifyEmail()
@@ -69,12 +65,18 @@ class UserActivity : AppCompatActivity() {
             startActivity(intent)
             Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
             Log.i("VERIFY", "Login/Password error Password")
-        } else if(cpf) {Log.i("VERIFY", "CPF OK")
-        } else if(email) { Log.i("VERIFY", "Email Ok")
+            return false
+        } else if(cpf) {
+            Log.i("VERIFY", "CPF OK")
+            return true
+        } else if(email) {
+            Log.i("VERIFY", "Email Ok")
+            return true
         } else {
             startActivity(intent)
             Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
             Log.i("VERIFY", "Login/Password error - pass OK")
+            return false
         }
     }
 
