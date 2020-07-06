@@ -18,10 +18,6 @@ class UserViewModel : ViewModel() {
     val userLiveData: MutableLiveData<UserResponse> = MutableLiveData()
 
     fun autenticLogin(user: String, pass: String){
-
-//        val user = "test_user"
-//        val pass = "Test@1"
-
         Api.serviceUser.postAluno(user, pass).enqueue(object:
             Callback<UserAccountResponse> {
             override fun onResponse(call: Call<UserAccountResponse>, response: Response<UserAccountResponse>) {

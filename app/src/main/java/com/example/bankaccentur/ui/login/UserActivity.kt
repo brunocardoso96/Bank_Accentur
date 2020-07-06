@@ -3,8 +3,10 @@ package com.example.bankaccentur.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -25,6 +27,8 @@ class UserActivity : AppCompatActivity() {
 
     fun initialize() {
         clickButtonLogin()
+        val textSave = PreferenceManager.getDefaultSharedPreferences(this@UserActivity).getString("MYLABEL", "defaultValue");
+        textViewUser.setText(textSave)
     }
 
     fun clickButtonLogin() {
@@ -35,6 +39,8 @@ class UserActivity : AppCompatActivity() {
 
             val passInput = textViewPass.text.toString()
             val userInput = textViewUser.text.toString()
+
+            PreferenceManager.getDefaultSharedPreferences(this@UserActivity).edit().putString("MYLABEL", userInput).apply()
 
             viewModel.autenticLogin(userInput, passInput)
 
