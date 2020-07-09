@@ -9,6 +9,44 @@ class UserVerificationTest {
     val verify = UserVerification()
 
     @Test
+    fun verifyPassword_InvalidPassword_OneCaracters_to_FiveCaracters() {
+        val onePassword = "a"
+        val validateOnePassword = verify.verifyPassword(onePassword)
+        assertEquals(false, validateOnePassword)
+
+        val twoPassword = "aa"
+        val validateTwoPassword = verify.verifyPassword(twoPassword)
+        assertEquals(false, validateTwoPassword)
+
+        val threePassword = "aaa"
+        val validateThreePassword = verify.verifyPassword(threePassword)
+        assertEquals(false, validateThreePassword)
+
+        val fourPassword = "aaaa"
+        val validateFourPassword = verify.verifyPassword(fourPassword)
+        assertEquals(false, validateFourPassword)
+
+        val fivePassword = "aaaaa"
+        val validateFivePassword = verify.verifyPassword(fivePassword)
+        assertEquals(false, validateFivePassword)
+
+        val zeroPassword = ""
+        val validateZeroPassword = verify.verifyPassword(zeroPassword)
+        assertEquals(false, validateZeroPassword)
+    }
+
+    @Test
+    fun verifyPassword_DuasTentativasDePassword_InvalidPassword_and_CorrectPassword() {
+        val invalidPassword = "aaa"
+        val validatePasswordInvalid = verify.verifyPassword(invalidPassword)
+        assertEquals(false, validatePasswordInvalid)
+
+        val correctPassword = "A@1"
+        val validateCorrectPassword = verify.verifyPassword(correctPassword)
+        assertEquals(true, validateCorrectPassword)
+    }
+
+    @Test
     fun verifyPassword_InvalidPassword_Inserting_LowerCase_Number_Number() {
         val password = "a11"
         val validarPassword = verify.verifyPassword(password)
