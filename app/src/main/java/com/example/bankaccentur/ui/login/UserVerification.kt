@@ -11,6 +11,14 @@ class UserVerification {
                 "(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})"
     )
 
+    private val EMAIL_ADRESS_BR = Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})" +
+                "(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})"
+    )
+
     private val PASSWORD_PATTERN = Pattern.compile(
 //        "^" +  "(?=.*[0-9])" +
                 "(?=.*[A-Z])" +
@@ -72,6 +80,9 @@ class UserVerification {
     }
 
     fun verifyEmail(email: String): Boolean {
-        return EMAIL_ADRESS.matcher(email).matches()
+        if(EMAIL_ADRESS.matcher(email).matches()) { return true }
+        if(EMAIL_ADRESS_BR.matcher(email).matches()) { return true }
+        return false
+
     }
 }

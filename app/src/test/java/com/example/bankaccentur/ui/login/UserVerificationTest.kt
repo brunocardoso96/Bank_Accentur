@@ -6,7 +6,7 @@ import org.junit.Assert.*
 
 class UserVerificationTest {
 
-    class verifyPassword() {
+    class verifyPassword {
 
         val verify = UserVerification()
 
@@ -73,6 +73,17 @@ class UserVerificationTest {
             val correctPassword = "A@1"
             val validateCorrectPassword = verify.verifyPassword(correctPassword)
             assertEquals(true, validateCorrectPassword)
+        }
+
+        @Test
+        fun verifyPassword_DuasTentativasDePassword_InvalidPassword_and_InvalidPassword() {
+            val invalidPassword1 = "aaa"
+            val validatePasswordInvalid = verify.verifyPassword(invalidPassword1)
+            assertEquals(false, validatePasswordInvalid)
+
+            val invalidPassword2 = "aaa"
+            val validateCorrectPassword = verify.verifyPassword(invalidPassword2)
+            assertEquals(false, validateCorrectPassword)
         }
 
         @Test
@@ -327,7 +338,73 @@ class UserVerificationTest {
         }
     }
 
-    class verifyEmail() {
+    class verifyEmail {
 
+        val verify = UserVerification()
+
+        @Test
+        fun verifyEmail_InvalidEmail_Inserting_Text() {
+            val email = "teste"
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(false, validateEmail)
+        }
+
+        @Test
+        fun verifyEmail_InvalidEmail_Inserting_SpecialCharacter() {
+            val email = "@@@@@"
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(false, validateEmail)
+        }
+
+        @Test
+        fun verifyEmail_InvalidEmail_Inserting_Text_SpecialCharacter() {
+            val email = "teste@"
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(false, validateEmail)
+        }
+
+        @Test
+        fun verifyEmail_InvalidEmail_Inserting_Text_SpecialCharacter_Text() {
+            val email = "teste@teste."
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(false, validateEmail)
+        }
+
+        @Test
+        fun verifyEmail_InvalidEmail_Inserting_SpecialCharacter_Text_Com() {
+            val email = "@teste.com"
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(false, validateEmail)
+        }
+
+        @Test
+        fun verifyEmail_InvalidEmail_Inserting_Text_Com() {
+            val email = "teste.com"
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(false, validateEmail)
+        }
+
+        @Test
+        fun verifyEmail_InvalidEmail_Inserting_Void() {
+            val email = ""
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(false, validateEmail)
+        }
+
+        @Test
+        fun verifyEmail_CorrectEmail_Inserting_EmailSimple_Com(){
+            val email = "teste@teste.com"
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(true, validateEmail)
+        }
+
+        @Test
+        fun verifyEmail_CorrectEmail_Inserting_EmailSimple_Com_Br(){
+            val email = "teste@teste.com.br"
+            val validateEmail = verify.verifyEmail(email)
+            assertEquals(true, validateEmail)
+        }
     }
+
+
 }
