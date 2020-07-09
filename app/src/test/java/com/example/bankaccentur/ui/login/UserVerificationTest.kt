@@ -9,7 +9,7 @@ class UserVerificationTest {
     val verify = UserVerification()
 
     @Test
-    fun verifyPassword_InvalidPassword_OneCaracters_to_FiveCaracters() {
+    fun verifyPassword_InvalidPassword_Up_To_FiveCaracters() {
         val onePassword = "a"
         val validateOnePassword = verify.verifyPassword(onePassword)
         assertEquals(false, validateOnePassword)
