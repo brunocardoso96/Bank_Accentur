@@ -3,9 +3,7 @@ package com.example.bankaccentur.ui.login
 import java.util.*
 import java.util.regex.Pattern
 
-
 class UserVerification {
-
     private val EMAIL_ADRESS = Pattern.compile(
         "[a-zA-Z0-9\\+\\.\\_\\%\\+]{1,256}" +
                 "\\@" +
@@ -14,14 +12,15 @@ class UserVerification {
     )
 
     private val PASSWORD_PATTERN = Pattern.compile(
-        "^" +  "(?=.*[0-9])" +
+//        "^" +  "(?=.*[0-9])" +
                 "(?=.*[A-Z])" +
-                "(?=.*[a-zA-Z])" +
+//                "(?=.*[a-zA-Z])" +
                 "(?=.*[@#$%^&+=])" +
                 "(?=\\S+$)" +
-                ".{4,}" +
+                ".{3,}" +
                 "$"
     )
+
     fun verifyPassword(pass: String): Boolean {
         return PASSWORD_PATTERN.matcher(pass).matches()
     }
