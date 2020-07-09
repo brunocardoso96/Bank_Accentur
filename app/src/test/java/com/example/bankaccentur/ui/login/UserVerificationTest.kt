@@ -9,6 +9,33 @@ class UserVerificationTest {
     val verify = UserVerification()
 
     @Test
+    fun verifyPassword_CorrectPassword_Up_To_FiveCaracters() {
+        val onePassword = "A"
+        val validateOnePassword = verify.verifyPassword(onePassword)
+        assertEquals(false, validateOnePassword)
+
+        val twoPassword = "A@"
+        val validateTwoPassword = verify.verifyPassword(twoPassword)
+        assertEquals(false, validateTwoPassword)
+
+        val threePassword = "A@1"
+        val validateThreePassword = verify.verifyPassword(threePassword)
+        assertEquals(true, validateThreePassword)
+
+        val fourPassword = "A@1a"
+        val validateFourPassword = verify.verifyPassword(fourPassword)
+        assertEquals(true, validateFourPassword)
+
+        val fivePassword = "A@1aA"
+        val validateFivePassword = verify.verifyPassword(fivePassword)
+        assertEquals(true, validateFivePassword)
+
+        val zeroPassword = ""
+        val validateZeroPassword = verify.verifyPassword(zeroPassword)
+        assertEquals(false, validateZeroPassword)
+    }
+
+    @Test
     fun verifyPassword_InvalidPassword_Up_To_FiveCaracters() {
         val onePassword = "a"
         val validateOnePassword = verify.verifyPassword(onePassword)
