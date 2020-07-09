@@ -14,7 +14,7 @@ class UserVerification {
     private val PASSWORD_PATTERN = Pattern.compile(
 //        "^" +  "(?=.*[0-9])" +
                 "(?=.*[A-Z])" +
-//                "(?=.*[a-zA-Z])" +
+                "(?=.*[a-z0-9])" +
                 "(?=.*[@#$%^&+=])" +
                 "(?=\\S+$)" +
                 ".{3,}" +

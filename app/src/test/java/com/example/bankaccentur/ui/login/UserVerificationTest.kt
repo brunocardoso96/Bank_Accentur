@@ -133,6 +133,69 @@ class UserVerificationTest {
         assertEquals(false, validarPassword)
     }
 
+    @Test
+    fun verifyPassword_InvalidPassword_Inserting_UpperCase_LowerCase_LowerCase() {
+        val password = "Aaa"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(false, validarPassword)
+    }
+
+    @Test
+    fun verifyPassword_InvalidPassword_Inserting_UpperCase_LowerCase_Number() {
+        val password = "Aa1"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(false, validarPassword)
+    }
+
+    @Test
+    fun verifyPassword_CorrectPassword_Inserting_UpperCase_LowerCase_EspecialCharacter() {
+        val password = "Aa@"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(true, validarPassword)
+    }
+
+    @Test
+    fun verifyPassword_InvalidPassword_Inserting_UpperCase_Number_LowerCase() {
+        val password = "A1a"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(false, validarPassword)
+    }
+
+    @Test
+    fun verifyPassword_InvalidPassword_Inserting_UpperCase_Number_Number() {
+        val password = "A11"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(false, validarPassword)
+    }
+
+    @Test
+    fun verifyPassword_CorrectPassword_Inserting_UpperCase_Number_SpecialCharacter() {
+        val password = "A1@"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(true, validarPassword)
+    }
+
+    @Test
+    fun verifyPassword_CorrectPassword_Inserting_UpperCase_SpecialCharacter_LowerCase() {
+        val password = "A@a"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(true, validarPassword)
+    }
+
+    @Test
+    fun verifyPassword_CorrectPassword_Inserting_UpperCase_SpecialCharacter_Number() {
+        val password = "A@1"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(true, validarPassword)
+    }
+
+    @Test
+    fun verifyPassword_InvalidPassword_Inserting_UpperCase_SpecialCharacter_SpecialCharacter() {
+        val password = "A@@"
+        val validarPassword = verify.verifyPassword(password)
+        assertEquals(false, validarPassword)
+    }
+
 }
 
 /*
