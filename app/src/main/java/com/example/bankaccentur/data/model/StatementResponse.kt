@@ -27,7 +27,7 @@ data class StatementResponse(
         get() {
             val locale = Locale("pt", "BR")
             return try {
-                val date = SimpleDateFormat("dd/MM/yyyy", locale).parse(date?: "")
+                val date = SimpleDateFormat("yyyy-MM-dd", locale).parse(date?: "")
                 SimpleDateFormat("MMM yyyy", locale).format(date).capitalize()
             } catch (e: ParseException){
                 ""
