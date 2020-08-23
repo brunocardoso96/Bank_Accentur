@@ -27,8 +27,14 @@ class UserActivity : AppCompatActivity() {
 
     private fun initialize() {
         clickButtonLogin()
-        val textSave = PreferenceManager.getDefaultSharedPreferences(this@UserActivity).getString("MYLABEL", "defaultValue");
-        textViewUser.setText(textSave)
+        val userSave = PreferenceManager.getDefaultSharedPreferences(this@UserActivity).getString("MYLABEL", "defaultValue")
+
+        // pra não ficar colocando a senha sempre
+        val passSave = PreferenceManager.getDefaultSharedPreferences(this@UserActivity).getString("MYPASS", "@Aa2")
+        // pra não ficar colocando a senha sempre
+
+        textViewUser.setText(userSave)
+        textViewPass.setText(passSave)
     }
 
     private fun clickButtonLogin() {
@@ -38,6 +44,11 @@ class UserActivity : AppCompatActivity() {
             val passInput = textViewPass.text.toString()
             val userInput = textViewUser.text.toString()
             PreferenceManager.getDefaultSharedPreferences(this@UserActivity).edit().putString("MYLABEL", userInput).apply()
+
+            // pra não ficar colocando a senha sempre
+            PreferenceManager.getDefaultSharedPreferences(this@UserActivity).edit().putString("MYPASS", passInput).apply()
+            // pra não ficar colocando a senha sempre
+
             viewModel.autenticLogin(userInput, passInput)
             val intent = BankMainActivity.getStartIntent(this@UserActivity)
             if(verifyUser()) {

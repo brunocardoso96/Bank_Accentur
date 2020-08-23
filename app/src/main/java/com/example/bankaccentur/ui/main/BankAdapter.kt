@@ -28,23 +28,7 @@ class BankAdapter(private val lista: List<StatementResponse>): RecyclerView.Adap
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val statement = lista[position]
         holder.binding.date = statement
-
-
-        //holder.bindView(lista[position])
     }
 
-    inner class MyViewHolder constructor(val binding: ActivityPaymentBinding) : RecyclerView.ViewHolder(binding.root) {
-
-//        private val title = itemView.textViewTitle
-//        private val desc = itemView.textViewDesc
-//        private val date = itemView.textViewDate
-//        private val value = itemView.textViewValue
-//
-//        fun bindView(pagamento: StatementResponse) {
-//            title.text = pagamento.title
-//            desc.text = pagamento.desc
-//            date.text = pagamento.date
-//            value.text = pagamento.value.toString()
-//        }
-    }
+    inner class MyViewHolder constructor(val binding: ActivityPaymentBinding) : RecyclerView.ViewHolder(binding.root)
 }
