@@ -15,7 +15,7 @@ data class StatementResponse(
     @Json(name ="date")
     val date: String,
     @Json(name ="value")
-    val value: Double) {
+    val value: String) {
 
     fun getStatementModel() =  StatementResponse(
         title = this.title,
