@@ -58,7 +58,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:hint="Data"
-                        android:text="@{date.date}"
+                        android:text="@{date.createdDate}"
                         android:textColor="#C0C0C0"
                         android:textSize="14sp" />
                 </LinearLayout>
