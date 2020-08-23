@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
 import com.example.bankaccentur.data.model.StatementResponse
 import kotlinx.android.synthetic.main.activity_bank_main_activity.*
+import java.text.DecimalFormat
 
 class BankMainActivity : AppCompatActivity() {
 
@@ -62,5 +63,11 @@ class BankMainActivity : AppCompatActivity() {
         textViewAgency.setText(agency)
         textViewBalance.setText(balance)
     }
-
 }
+
+/*
+public static String truncate(double value) {
+    DecimalFormat df = new DecimalFormat("#.00");
+    return df.format(value);
+}
+ */

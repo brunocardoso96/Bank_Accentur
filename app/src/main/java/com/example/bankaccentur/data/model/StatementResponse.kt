@@ -2,6 +2,9 @@ package com.example.bankaccentur.data.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class StatementResponse(
@@ -19,4 +22,15 @@ data class StatementResponse(
         desc = this.desc,
         date = this.date,
         value = this.value)
+
+    val createdDate : String
+        get() {
+            val locale = Locale("pt", "BR")
+            return try {
+                val date = SimpleDateFormat("dd/MM/yyyy", locale).parse(date?: "")
+                SimpleDateFormat("MMM yyyy", locale).format(date).capitalize()
+            } catch (e: ParseException){
+                ""
+            }
+        }
 }

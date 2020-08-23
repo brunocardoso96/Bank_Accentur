@@ -25,13 +25,13 @@ class UserActivity : AppCompatActivity() {
         initialize()
     }
 
-    fun initialize() {
+    private fun initialize() {
         clickButtonLogin()
         val textSave = PreferenceManager.getDefaultSharedPreferences(this@UserActivity).getString("MYLABEL", "defaultValue");
         textViewUser.setText(textSave)
     }
 
-    fun clickButtonLogin() {
+    private fun clickButtonLogin() {
         buttonLogin = findViewById(R.id.buttonLogin)
         buttonLogin.setOnClickListener {
             val viewModel: UserViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
@@ -61,46 +61,45 @@ class UserActivity : AppCompatActivity() {
         val cpf= verifyEmail()
         intent = Intent(this, UserActivity::class.java)
 
-        if(!pass) {
-            startActivity(intent)
-            Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
-            Log.i("VERIFY", "Login/Password error Password")
-            return false
-        } else if(cpf) {
-            Log.i("VERIFY", "CPF OK")
-            return true
-        } else if(email) {
-            Log.i("VERIFY", "Email Ok")
-            return true
-        } else {
-            startActivity(intent)
-            Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
-            Log.i("VERIFY", "Login/Password error - pass OK")
-            return false
+        when {
+            !pass -> {
+                startActivity(intent)
+                Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
+                Log.i("VERIFY", "Login/Password error Password")
+                return false
+            }
+            cpf -> {
+                Log.i("VERIFY", "CPF OK")
+                return true
+            }
+            email -> {
+                Log.i("VERIFY", "Email Ok")
+                return true
+            }
+            else -> {
+                startActivity(intent)
+                Toast.makeText(applicationContext, "Email ou Senha errado", Toast.LENGTH_LONG).show()
+                Log.i("VERIFY", "Login/Password error - pass OK")
+                return false
+            }
         }
     }
 
-    fun verifyPassword(): Boolean {
+    private fun verifyPassword(): Boolean {
         val passInput = textViewPass.text.toString()
-        if(!UserVerification().verifyPassword(passInput)) {
-            return false
-        }
+        if(!UserVerification().verifyPassword(passInput)) return false
         return true
     }
 
-    fun verifyCpf(): Boolean {
+    private fun verifyCpf(): Boolean {
         val userInput = textViewUser.text.toString()
-        if(!UserVerification().verifyCpf(userInput)) {
-            return false
-        }
+        if(!UserVerification().verifyCpf(userInput)) return false
         return true
     }
 
-    fun verifyEmail(): Boolean {
+    private fun verifyEmail(): Boolean {
         val userInput = textViewUser.text.toString()
-        if(!UserVerification().verifyEmail(userInput)) {
-            return false
-        }
+        if(!UserVerification().verifyEmail(userInput)) return false
         return true
     }
 }

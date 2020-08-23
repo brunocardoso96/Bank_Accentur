@@ -7,9 +7,7 @@ import retrofit2.http.*
 
 interface Service {
     @GET("statements/{userId}")
-    fun getStatement(
-        @Path("userId") userId: Int
-    ) : Call<StatementListResponse>
+    fun getStatement(@Path("userId") userId: Int) : Call<StatementListResponse>
 
     @POST("login")
     @FormUrlEncoded
