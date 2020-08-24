@@ -56,8 +56,8 @@ class UserActivity : AppCompatActivity() {
                     userResponse?.let {
                         intent.putExtra("EXTRA_userId", it.userId.toString())
                         intent.putExtra("EXTRA_name", it.name)
-                        intent.putExtra("EXTRA_bankAccount", it.bankAccount)
-                        intent.putExtra("EXTRA_agency", it.agency)
+                        intent.putExtra("EXTRA_bankAccount", it.agency)
+                        intent.putExtra("EXTRA_agency", it.bankAccount)
                         intent.putExtra("EXTRA_balance", it.balance.toString())
                     }
                     this@UserActivity.startActivity(intent)

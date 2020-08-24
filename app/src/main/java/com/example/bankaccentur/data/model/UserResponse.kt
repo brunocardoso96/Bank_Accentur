@@ -2,6 +2,8 @@ package com.example.bankaccentur.data.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 
 @JsonClass(generateAdapter = true)
 data class UserResponse (

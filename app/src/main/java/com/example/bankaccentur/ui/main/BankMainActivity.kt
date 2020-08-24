@@ -3,9 +3,10 @@ package com.example.bankaccentur.ui.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
 import com.example.bankaccentur.data.model.StatementResponse
 import kotlinx.android.synthetic.main.activity_bank_main_activity.*
-import java.text.DecimalFormat
+import java.lang.Exception
+
 
 class BankMainActivity : AppCompatActivity() {
 
@@ -59,15 +61,25 @@ class BankMainActivity : AppCompatActivity() {
         val balance = intent.getStringExtra("EXTRA_balance")
 
         textViewName.setText(name)
-        textViewBankAccount.setText(bankAccount)
         textViewAgency.setText(agency)
+        textViewBankAccount.setText(accountFormat(bankAccount))
         textViewBalance.setText(balance)
     }
+
+    fun accountFormat(account: String): String {
+        try {
+            val campo1 = account.substring(0,2)
+            val campo2 = account.substring(2,8)
+            val campo3 = account.substring(8,9)
+            return "$campo1.$campo2-$campo3"
+        } catch (e: Exception) {
+            return account
+            Log.i("ERROR FORMAT", "Erro ao formatar a string $account")
+        }
+
+    }
+
+
+
 }
 
-/*
-public static String truncate(double value) {
-    DecimalFormat df = new DecimalFormat("#.00");
-    return df.format(value);
-}
- */
