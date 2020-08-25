@@ -15,6 +15,9 @@ import com.example.bankaccentur.R
 import com.example.bankaccentur.data.model.StatementResponse
 import kotlinx.android.synthetic.main.activity_bank_main_activity.*
 import java.lang.Exception
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
 
 
 class BankMainActivity : AppCompatActivity() {
@@ -63,10 +66,12 @@ class BankMainActivity : AppCompatActivity() {
         textViewName.setText(name)
         textViewAgency.setText(agency)
         textViewBankAccount.setText(accountFormat(bankAccount))
-        textViewBalance.setText(balance)
+        textViewBalance.setText(balanceFormat(balance))
+
+
     }
 
-    fun accountFormat(account: String): String {
+    private fun accountFormat(account: String): String {
         try {
             val campo1 = account.substring(0,2)
             val campo2 = account.substring(2,8)
@@ -74,12 +79,24 @@ class BankMainActivity : AppCompatActivity() {
             return "$campo1.$campo2-$campo3"
         } catch (e: Exception) {
             return account
-            Log.i("ERROR FORMAT", "Erro ao formatar a string $account")
+            Log.i("ERROR_FORMAT", "Erro ao formatar a string $account")
         }
-
     }
 
-
-
+    private fun balanceFormat(balance: String): String {
+        val range = balance.length
+        var stringFormat: String = ""
+        for(i in 0..range-1) {
+            var char = balance.substring(i, i+1)
+            if ("." == char ) {
+            } else {
+                stringFormat += char
+            }
+        }
+        val balanceDouble = stringFormat.toInt()
+        val numberFormat = DecimalFormat("#,##0.00", DecimalFormatSymbols(Locale("pt", "BR")))
+        return numberFormat.format(balanceDouble).toString()
+    }
 }
+
 

@@ -38,9 +38,9 @@ data class StatementResponse(
         }
 
     val createdValue : String
-        get() {
-            val value = this.value.toDouble()
-            val numberFormat = DecimalFormat("R$#,##0.00", DecimalFormatSymbols(Locale("pt", "BR")))
-            return numberFormat.format(value).toString()
-        }
+    get() {
+        val value = this.value.toDouble()
+        val numberFormat = DecimalFormat("R$#,##0.00", DecimalFormatSymbols(Locale("pt", "BR")))
+        return numberFormat.format(value).toString()
+    }
 }
