@@ -1,14 +1,10 @@
 package com.example.bankaccentur.ui.login
 
-import android.util.Log
-import android.view.View.Z
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
 import com.example.bankaccentur.data.model.UserAccountResponse
 import com.example.bankaccentur.data.model.UserResponse
 import com.example.bankaccentur.data.retrofit.Api
-import com.example.bankaccentur.ui.main.BankMainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

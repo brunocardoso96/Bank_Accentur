@@ -1,14 +1,12 @@
 package com.example.bankaccentur.ui.main
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
 import com.example.bankaccentur.data.model.StatementResponse
 import com.example.bankaccentur.databinding.ActivityPaymentBinding
-import kotlinx.android.synthetic.main.activity_payment.view.*
 
 class BankAdapter(private val lista: List<StatementResponse>): RecyclerView.Adapter<BankAdapter.MyViewHolder>() {
 

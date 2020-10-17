@@ -1,7 +1,5 @@
 package com.example.bankaccentur.data.model
 
-import android.annotation.SuppressLint
-import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -11,13 +9,9 @@ import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class StatementResponse(
-    @Json(name ="title")
     val title: String,
-    @Json(name ="desc")
     val desc: String,
-    @Json(name ="date")
     val date: String,
-    @Json(name ="value")
     val value: String) {
 
     fun getStatementModel() =  StatementResponse(

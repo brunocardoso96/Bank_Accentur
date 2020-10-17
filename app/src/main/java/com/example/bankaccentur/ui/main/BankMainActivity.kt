@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
 import com.example.bankaccentur.data.model.StatementResponse
 import kotlinx.android.synthetic.main.activity_bank_main_activity.*
-import java.lang.Exception
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
