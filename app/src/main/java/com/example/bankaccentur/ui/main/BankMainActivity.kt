@@ -67,8 +67,6 @@ class BankMainActivity : AppCompatActivity() {
         textViewAgency.setText(agency)
         textViewBankAccount.setText(accountFormat(bankAccount))
         textViewBalance.setText(balanceFormat(balance))
-
-
     }
 
     private fun accountFormat(account: String): String {

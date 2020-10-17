@@ -21,8 +21,6 @@ class BankAdapter(private val lista: List<StatementResponse>): RecyclerView.Adap
             )
         )
 
-
-
     override fun getItemCount(): Int = lista.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
