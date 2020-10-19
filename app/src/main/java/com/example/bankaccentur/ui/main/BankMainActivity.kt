@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankaccentur.R
+import com.example.bankaccentur.data.helper.FormatAccont
+import com.example.bankaccentur.data.helper.FormatBalance
 import com.example.bankaccentur.data.model.StatementResponse
 import kotlinx.android.synthetic.main.activity_bank_main_activity.*
 import java.text.DecimalFormat
@@ -21,9 +23,6 @@ import java.util.*
 
 class BankMainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-
-    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bank_main_activity)
@@ -34,10 +33,13 @@ class BankMainActivity : AppCompatActivity() {
         fun getStartIntent(context: Context): Intent { return Intent(context, BankMainActivity::class.java)}
     }
 
-    fun initalizer() {
-        recyclerView = findViewById(R.id.recyclerViewPayment)
+    private fun initalizer() {
+        insertUserInfo()
+        initalizeViewModel()
+    }
+
+    private fun initalizeViewModel() {
         val viewModel: BankViewModel = ViewModelProviders.of(this).get(BankViewModel::class.java)
-        initializeUserInfo()
         viewModel.bankLiveData.observe(this, Observer {
             it?.let {statements ->
                 initalizeRecycler(statements)
@@ -47,52 +49,19 @@ class BankMainActivity : AppCompatActivity() {
         viewModel.getStatementLive(userId.toInt())
     }
 
-    @SuppressLint("WrongConstant")
-    fun initalizeRecycler(list: List<StatementResponse>) {
+    private fun initalizeRecycler(list: List<StatementResponse>) {
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerViewPayment)
         recyclerView.apply {
-            recyclerView.layoutManager = LinearLayoutManager(this@BankMainActivity, LinearLayout.VERTICAL, false)
-            val adapter = BankAdapter(list)
-            recyclerView.adapter = adapter
+            recyclerView.layoutManager = LinearLayoutManager(this@BankMainActivity, RecyclerView.VERTICAL, false)
+            recyclerView.adapter = BankAdapter(list)
         }
     }
 
-    fun initializeUserInfo() {
-        val name = intent.getStringExtra("EXTRA_name")
-        val bankAccount = intent.getStringExtra("EXTRA_bankAccount")
-        val agency = intent.getStringExtra("EXTRA_agency")
-        val balance = intent.getStringExtra("EXTRA_balance")
-
-        textViewName.setText(name)
-        textViewAgency.setText(agency)
-        textViewBankAccount.setText(accountFormat(bankAccount))
-        textViewBalance.setText(balanceFormat(balance))
-    }
-
-    private fun accountFormat(account: String): String {
-        try {
-            val campo1 = account.substring(0,2)
-            val campo2 = account.substring(2,8)
-            val campo3 = account.substring(8,9)
-            return "$campo1.$campo2-$campo3"
-        } catch (e: Exception) {
-            return account
-            Log.i("ERROR_FORMAT", "Erro ao formatar a string $account")
-        }
-    }
-
-    private fun balanceFormat(balance: String): String {
-        val range = balance.length
-        var stringFormat: String = ""
-        for(i in 0..range-1) {
-            var char = balance.substring(i, i+1)
-            if ("." == char ) {
-            } else {
-                stringFormat += char
-            }
-        }
-        val balanceDouble = stringFormat.toInt()
-        val numberFormat = DecimalFormat("#,##0.00", DecimalFormatSymbols(Locale("pt", "BR")))
-        return numberFormat.format(balanceDouble).toString()
+    private fun insertUserInfo() {
+        textViewName.setText(intent.getStringExtra("EXTRA_name"))
+        textViewAgency.setText(intent.getStringExtra("EXTRA_agency"))
+        textViewBankAccount.setText(FormatAccont.format(intent.getStringExtra("EXTRA_bankAccount")))
+        textViewBalance.setText(FormatBalance.format(intent.getStringExtra("EXTRA_balance")))
     }
 }
 

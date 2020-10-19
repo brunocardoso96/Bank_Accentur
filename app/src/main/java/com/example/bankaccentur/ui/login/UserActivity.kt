@@ -83,7 +83,7 @@ class UserActivity : AppCompatActivity() {
                 return true
             }
             email -> {
-                Log.i("VERIFY", "Email Ok")
+                Log.i("VERIFY", "Email OK")
                 return true
             }
             else -> {
